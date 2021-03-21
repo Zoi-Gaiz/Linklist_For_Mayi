@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <accctrl.h>
+#include <vsadmin.h>
 
 
 typedef struct LNode {
@@ -28,7 +29,7 @@ void DisplayList(Linklist L) {
     }
 }
 
-void InsertList(Linklist L , int i ,int data)
+int InsertList(Linklist L , int i ,int data)
 {
     Linklist p;
     int j=0;
@@ -39,9 +40,13 @@ void InsertList(Linklist L , int i ,int data)
     }
     if(!p || j > i-1)
     {
-
+        return 0;
     }
-
+    Linklist s = (Linklist)malloc(sizeof(LNode));
+    s->data = data;
+    s->next = p->next;
+    p->next = s;
+    return 1;
 
 }
 
@@ -50,6 +55,7 @@ int main() {
     a->next = NULL;
     CreateList(a, 5);
     DisplayList(a);
+    InsertList(a,3,666666);
     return 0;
 }
 /*
