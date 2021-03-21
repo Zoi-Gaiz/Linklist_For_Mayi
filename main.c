@@ -63,9 +63,19 @@ int DeleteList_Node(Linklist L, int i) {
     k = p;
     p = p->next;
     k->next = p->next;
+    free(p);
     return 1;
 }
 
+void DestroyList(Linklist L) {
+    Linklist p, q;
+    p = L->next;
+    while (p != NULL) {
+        q = p;
+        p = p->next;
+        free(q);
+    }
+}
 
 int main() {
     Linklist a = (Linklist) malloc(sizeof(Linklist));
@@ -74,7 +84,7 @@ int main() {
     DisplayList(a);
     InsertList(a, 3, 666666);
     DisplayList(a);
-    DeleteList_Node(a,1);
+    DeleteList_Node(a, 1);
     DisplayList(a);
     return 0;
 }
